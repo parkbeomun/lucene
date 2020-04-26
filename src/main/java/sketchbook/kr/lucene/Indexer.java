@@ -37,9 +37,9 @@ public class Indexer {
 	
 	public static void main(String[] args) throws Exception {
 		
-		if(args.length != 2) {
-			throw new IllegalAccessError("Usage: java" + Indexer.class.getName()+ "<index dir> <data dir>");
-		}
+//		if(args.length != 2) {
+//			throw new IllegalAccessError("Usage: java" + Indexer.class.getName()+ "<index dir> <data dir>");
+//		}
 		
 		String indexDir = "./index";
 		String dataDir = "./data";
@@ -74,11 +74,12 @@ public class Indexer {
 		
 		for(File file :files) {
 			System.out.println(file.getName());
-			if(!file.isDirectory() && !file.isHidden() && !file.exists() && file.canRead() && (filter == null || filter.accept(file))) {
+			System.out.println(filter.accept(file));
+			if(!file.isDirectory() && !file.isHidden() && file.exists() && file.canRead() && (filter == null || filter.accept(file))) {
 				indexFile(file);
 			}
 		}
-		return writer.numDocs();
+		return writer.numDocs(); // 다음 추가될 Document가 할당받을 번호
 	}
 	
 	//Add Document 
